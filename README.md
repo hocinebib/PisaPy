@@ -10,7 +10,7 @@ Allows to automatically run [PISA](https://www.ebi.ac.uk/pdbe/pisa/) interfaces 
 
 ### System :
 * Linux : 
-The code has only been tested on Linux.
+The code has only been tested on Ubuntu.
 
 ### Browser :
 The code has only been tested with firefox.
@@ -31,7 +31,7 @@ $pip install pandas
 ```
 
 Conda installation :
-```shell
+```bash
 $conda create -n pisapy python
 $source activate pisapy
 $conda install -c conda-forge selenium
@@ -58,6 +58,7 @@ or download it.
 ### Exemple of usage :
 With pdb id :
 ```shell
+$cd PisaPy/
 $python src/PisaAuto_id.py 6ta5
 ```
 
