@@ -160,7 +160,7 @@ def create_df(lst):
                 data['ΔiG P-value'].append(c[4])
 
     return(pd.DataFrame.from_dict(data))
-    
+
 
 if __name__ == '__main__':
 

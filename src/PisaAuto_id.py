@@ -201,4 +201,3 @@ if __name__ == '__main__':
     PDB_ID = ARGS.pdb_id
 
     download_xmls(launch_pdb_id(start(), PDB_ID), PDB_ID)
-
