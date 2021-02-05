@@ -1,37 +1,49 @@
+#!/usr/bin/python3
 """
-small code to automaticaly use pisa web server with the pdb id
+Code to automatically run PDBePISA web server on the given pdb id and downloading the
+generated xml files.
 
-how to use :
+  How to use
+  ----------
+First you need to have the python packages selenium, halo and argparse installed.
 
-first you need to have the python packages selenium and argparse
+Then you can run the script with the following command :
 
-then you run the script with the following command :
+    python PisaAuto_id.py pdb_id
 
-    python PisaAuto_id.py 6ta5
-
-
-note that right now it's made for firefox browser but adding other browsers 
-isn't hard to implement
-also note that I only download interfacetable.xml and each hydrogenbond.xml 
-and saltbridge.xml files but if other xml files are needed adding it isn't 
+Note that right now it's made for firefox browser but adding other browsers 
+isn't hard to implement (ex: driver = webdriver.Chrome() for chrome).
+Also note that only the interface table, the residues interaction and interfacing 
+residues xml files are downloaded. 
 hard
 
-Hocine
+  Author
+  ------
+    Hocine Meraouna
+
 """
 
+import time
+import os
 import argparse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
-import time
-import os
 from halo import Halo
 
 
 def start():
     """
-    the function to access to the pisa web server
-    I'm using firefox but it can be changed here for other browsers
+    The function to access to the pisa web server.
+    I'm using firefox but it can be changed for other browsers.
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    selenium webdriver
     """
     print("1- Accessing to PISA website :")
 
@@ -50,7 +62,18 @@ def start():
 
 def launch_pdb_id(driver, pdb_id):
     """
-    the function to run pisa web service on the pdb id
+    The function to run pisa web service on the pdb id.
+    
+    Parameters
+    ----------
+    driver : selenium webdriver
+        given by the function start()
+    pdb_id : string
+        pdb id given by the user
+    
+    Returns
+    -------
+    selenium webdriver
     """
     print("2- Submitting "+pdb_id+" to PISA :")
 
@@ -78,7 +101,16 @@ def launch_pdb_id(driver, pdb_id):
 
 def download_xmls(driver, pdb_id):
     """
-    the function to download the xml files
+    The function to download the xml files.
+
+    Parameters
+    ----------
+    driver : selenium webdriver
+    pdb_id : string
+    
+    Returns
+    -------
+    Nothing
     """
     print("Done")
 
