@@ -1,39 +1,58 @@
+#!/usr/bin/python3
 """
-small code to automaticaly use pisa web server on pdb files
+Code to automatically run PDBePISA web server on pdb files and downloading the
+generated xml files.
 
-how to use :
+  How to use
+  ----------
 
-first you need to have the python packages selenium and argparse and the
-PisaAutomatic_id.py script, you also need the pdb files on witch you want 
-to run pisa
+First you need to have the python packages selenium, halo and argparse installed 
+and the PisaAuto_id.py script, you also need the pdb files on witch you want to 
+run pisa.
 
-then you run the script with the following command :
+Then you can run the script with the following command :
 
     python PisaAuto_file.py path_to_pdb_files_folder/
 
 
-note that right now it's made for firefox browser but adding other browsers 
-isn't hard to implement
-also note that I only download interfacetable.xml and each hydrogenbond.xml 
-and saltbridge.xml files but if other xml files are needed adding it isn't 
+Note that right now it's made for firefox browser but adding other browsers 
+isn't hard to implement (ex: driver = webdriver.Chrome() for chrome).
+Also note that only the interface table, the residues interaction and interfacing 
+residues xml files are downloaded. 
 hard
 
-Hocine
+  Author
+  ------
+    Hocine Meraouna
+
 """
 
-import argparse
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 import time
 import os
 import sys
-from selenium.common.exceptions import NoSuchElementException
-import PisaAuto_id as pisa
 from os import listdir
 from os.path import isfile
+import argparse
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
 from halo import Halo
+import PisaAuto_id as pisa
 
 def check_exists_by_name(name, driver):
+    """
+    The function to check if an element is present on the webdriver.
+
+    Parameters
+    ----------
+    driver : selenium webdriver
+    name : string
+        the name of the element
+
+    Returns
+    -------
+    boolean
+    """
     try:
         driver.find_element_by_name(name)
     except NoSuchElementException:
@@ -42,7 +61,18 @@ def check_exists_by_name(name, driver):
 
 def launch_pdb_file(driver, pdb_file):
     """
-    the function to run pisa web service on the pdb file
+    The function to run pisa web service on the pdb file.
+
+    Parameters
+    ----------
+    driver : selenium webdriver
+        given by the function PisaAuto_id.start()
+    pdb_file : string
+        corresponding to the pdb given by the user
+
+    Returns
+    -------
+    selenium webdriver
     """
     print("2- Uploading "+pdb_file+" :")
 
