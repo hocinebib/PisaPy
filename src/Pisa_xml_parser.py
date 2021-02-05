@@ -1,18 +1,23 @@
+#!/usr/bin/python3
 """
-small code for parsing pisa xml files and creating a csv file
+Code for parsing pisa xml files and saving data in a csv file.
 
-how to use :
+  How to use
+  ----------
 
-first you need to download interfacetable.xml and each hydrogenbond.xml and saltbridge.xml files
-given by pisa web server
+First you need to have the interfacetable.xml and each hydrogenbond.xml and saltbridge.xml files
+given by PDBePISA web server.
 
-then you run the script with the following command :
+Then you can run the script with the following command :
 
     python Pisa_xml_parser.py interfacetable.xml
 
-note that the hydrogen bond and slatbridge files must be on the same directory as interfacetable
+Note that the hydrogen bond and slat bridge files must be on the same directory as interfacetable
 
-Hocine
+  Author
+  ------
+    Hocine Meraoun
+
 """
 
 import argparse
@@ -25,8 +30,17 @@ DICT_CHAINS = {'OprM': 'ABC', 'MexA': 'DEFGHI', 'MexB': 'JKL'}
 
 def xmlbond_parser(xml_file):
     """
-    parse the interaction xml files
-    haven't been tested on disulfide and covalent bonds
+    The function to parse the interaction xml files.
+    It haven't been tested on disulfide and covalent bonds.
+
+    Parameters
+    ----------
+    xml_file : string
+        the name of the xml file
+
+    Returns
+    -------
+    list
     """
     value = []
     lst = []
@@ -51,7 +65,16 @@ def xmlbond_parser(xml_file):
 
 def give_prot(search_chain):
     """
-    just a little function to get the protein with the chain
+    Function to get the protein with the chain.
+
+    Parameters
+    ----------
+    search_chain : string
+        the name of the chain
+
+    Returns
+    -------
+    string
     """
     for protein in DICT_CHAINS.keys():
         for chain in DICT_CHAINS[protein]:
@@ -63,7 +86,16 @@ def give_prot(search_chain):
 
 def interfacetable_parse(xml_file):
     """
-    a little function to parse interfacetable.xml and calls xmlbond_parser()
+    Function to parse interfacetable.xml and calls xmlbond_parser().
+
+    Parameters
+    ----------
+    xml_file : string
+        interface table xml file name
+
+    Returns
+    -------
+    list
     """
     lst = []
     intern_lst = []
@@ -86,7 +118,16 @@ def interfacetable_parse(xml_file):
 
 def create_df(lst):
     """
-    the function that will create the dataframe
+    Function that creates the dataframe to save in a csv file.
+
+    Parameters
+    ----------
+    lst : list
+        list of lists given by interfacetable_parse()
+
+    Returns
+    -------
+    pandas DataFrame
     """
     data = {'protein1': [], 'chain1': [], 'res1': [], 
     'distance': [], 'protein2': [], 'chain2': [], 
