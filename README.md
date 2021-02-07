@@ -22,6 +22,8 @@ In order to be able to run this code of course you need to have python3 but also
 * `halo`
 * `argparse`
 * `pandas`
+* `networkx`
+* `matplotlib`
 
 PyPi installation :
 ```shell
@@ -29,6 +31,8 @@ $pip install selenium
 $pip install halo
 $pip install argparse
 $pip install pandas
+$pip install networkx
+$pip install matplotlib
 ```
 
 Conda installation :
@@ -39,6 +43,8 @@ $conda install -c conda-forge selenium
 $conda install -c conda-forge halo
 $conda install -c conda-forge argparse
 $conda install pandas
+$conda install -c anaconda networkx
+$conda install -c conda-forge matplotlib
 ```
 ### Others :
 selenium requires [geckodriver](https://github.com/mozilla/geckodriver/releases) for firefox, check this [link](https://selenium-python.readthedocs.io/installation.html#drivers) for the other browsers.
