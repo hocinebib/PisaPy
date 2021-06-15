@@ -101,6 +101,7 @@ def interfacetable_parse(xml_file):
     intern_lst = []
 
     path = '/'.join(xml_file.split('/')[:-1])
+    print(xml_file)
 
     with open(xml_file, "r") as f_xml:
         for line in f_xml :
