@@ -51,7 +51,7 @@ $conda install -c conda-forge biopython
 ```
 ### Others :
 selenium requires [geckodriver](https://github.com/mozilla/geckodriver/releases) for firefox, check this [link](https://selenium-python.readthedocs.io/installation.html#drivers) for the other browsers.
-[Naccess](http://www.bioinf.manchester.ac.uk/naccess/nacwelcome.html) is also required if you want to get the accessibility
+[Naccess](http://www.bioinf.manchester.ac.uk/naccess/nacwelcome.html) is also needed if you want to get the accessibility (note that this part is not required as the accessibility files given by pisa are also being downloaded)
 
 ### Script files :
 
@@ -74,18 +74,30 @@ or download it.
 With 1 pdb id :
 ```shell
 $cd PisaPy/
-$python src/RunPisaPy.py 6ta5
+$python src/PisaAuto_id.py 6ta5
+```
+
+with pdb files :
+```shell
+$python3 src/PisaAuto_file.py pdb_folder/ --d 1
+```
+
+### Exemple of pipeline usage :
+With 1 pdb id :
+```shell
+$cd PisaPy/
+$python src/RunPisaPy.py 6ta5 naccess_bin_path
 ```
 
 With many pdb ids :
 ```shell
 $cd PisaPy/
-$python src/RunPisaPy.py "6ta5 6iol 6iok"
+$python src/RunPisaPy.py "6ta5 6iol 6iok" naccess_bin_path
 ```
 
 with pdb files :
 ```shell
-$python3 src/RunPisaPy.py pdb_folder/ --d 1
+$python3 src/RunPisaPy.py pdb_folder/ --d 1 naccess_bin_path
 ```
 
 
