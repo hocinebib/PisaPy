@@ -89,11 +89,10 @@ def launch_pdb_file(driver, pdb_file):
 
     driver.find_element_by_name("btn_upload").click()
 
-    time.sleep(10)
+    while(not check_exists_by_name('btn_submit_interfaces', driver)):
+        pass
 
     driver.find_element_by_name("btn_submit_interfaces").click()
-
-    time.sleep(20)
 
     spinner.stop()
 

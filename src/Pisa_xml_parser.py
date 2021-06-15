@@ -100,17 +100,19 @@ def interfacetable_parse(xml_file):
     lst = []
     intern_lst = []
 
+    path = '/'.join(xml_file.split('/')[:-1])
+
     with open(xml_file, "r") as f_xml:
         for line in f_xml :
             if line.startswith("<INTERFACENO>"):
                 i = int(line[13:15].strip("<"))
                 intern_lst.append(i)
-                intern_lst.append(xmlbond_parser("hydrogenbond"+str(i-1)+".xml"))
-                intern_lst.append(xmlbond_parser("saltbridge"+str(i-1)+".xml"))
+                intern_lst.append(xmlbond_parser(path+"/hydrogenbond"+str(i-1)+".xml"))
+                intern_lst.append(xmlbond_parser(path+"/saltbridge"+str(i-1)+".xml"))
             elif line.startswith("<INTERFACEAREA>"):
-                intern_lst.append(float(line[15:23].strip("<")))
+                intern_lst.append(float(line.split('>')[1].split('<')[0]))
             elif line.startswith("<INTERFACEDELTAGPVALUE>"):
-                intern_lst.append(float(line[23:31].strip("<")))
+                intern_lst.append(float(line.split('>')[1].split('<')[0]))
                 lst.append(intern_lst)
                 intern_lst = []
 

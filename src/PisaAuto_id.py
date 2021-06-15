@@ -29,7 +29,29 @@ import argparse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
+from selenium.common.exceptions import NoSuchElementException
 from halo import Halo
+
+
+def check_exists_by_name(name, driver):
+    """
+    The function to check if an element is present on the webdriver.
+
+    Parameters
+    ----------
+    driver : selenium webdriver
+    name : string
+        the name of the element
+
+    Returns
+    -------
+    boolean
+    """
+    try:
+        driver.find_element_by_name(name)
+    except NoSuchElementException:
+        return False
+    return True
 
 
 def start():
@@ -93,7 +115,10 @@ def launch_pdb_id(driver, pdb_id):
     interface = driver.find_element_by_name("btn_submit_interfaces")
     interface.click()
 
-    time.sleep(20)
+    while(not check_exists_by_name('downloadXML', driver)):
+        pass
+
+    time.sleep(2)
 
     spinner.stop()
 
@@ -121,28 +146,31 @@ def download_xmls(driver, pdb_id):
 
     driver.find_element_by_name('downloadXML').click()
 
-    time.sleep(10)
+    time.sleep(5)
 
     driver.switch_to.window(driver.window_handles[1])
     xml = driver.current_url
 
-    if not os.path.exists('xml_files'+pdb_id):
-        os.makedirs('xml_files'+pdb_id)
+    if not os.path.exists('Results'):
+        os.makedirs('Results')
 
-    with open('xml_files'+pdb_id+'/'+xml.split('/')[-1], 'w') as f:
+    if not os.path.exists('Results/xml_files'+pdb_id):
+        os.makedirs('Results/xml_files'+pdb_id)
+
+    with open('Results/xml_files'+pdb_id+'/'+xml.split('/')[-1], 'w') as f:
         f.write(driver.page_source)
 
-    time.sleep(6)
+    time.sleep(3)
 
     driver.close()
 
-    time.sleep(6)
+    time.sleep(2)
 
     driver.switch_to.window(driver.window_handles[0])
 
     inter_lst = []
 
-    with open('xml_files'+pdb_id+'/'+xml.split('/')[-1], "r") as f_xml:
+    with open('Results/xml_files'+pdb_id+'/'+xml.split('/')[-1], "r") as f_xml:
         for line in f_xml:
             if line.strip().startswith("<INTERFACENO>"):
                 inter_lst.append(line[13:15].strip("<"))
@@ -154,34 +182,36 @@ def download_xmls(driver, pdb_id):
         spinner = Halo(text="Downloading files "+i+"/"+str(len(inter_lst)), spinner='dots')
         spinner.start()
 
+        time.sleep(2)
+
         driver.find_element_by_link_text(i).click()
 
-        time.sleep(6)
+        time.sleep(5)
 
         xmls = driver.find_elements_by_name('downloadXML')
 
-        for i in range(2,len(xmls)):
+        for i in range(1,len(xmls)):
             xmls[i].click()
 
-            time.sleep(10)
+            time.sleep(3)
 
             driver.switch_to.window(driver.window_handles[1])
             xml = driver.current_url
 
-            with open('xml_files'+pdb_id+'/'+xml.split('/')[-1], 'w') as f:
+            with open('Results/xml_files'+pdb_id+'/'+xml.split('/')[-1], 'w') as f:
                 f.write(driver.page_source)
 
-            time.sleep(6)
+            time.sleep(3)
 
             driver.close()
 
-            time.sleep(6)
+            time.sleep(2)
 
             driver.switch_to.window(driver.window_handles[0])
 
         driver.back()
 
-        time.sleep(5)
+        time.sleep(3)
 
         spinner.stop()
 
