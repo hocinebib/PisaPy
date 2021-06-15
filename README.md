@@ -51,6 +51,7 @@ selenium requires [geckodriver](https://github.com/mozilla/geckodriver/releases)
 
 ### Script files :
 
+`RunPisaPy.py`
 `PisaAuto_id.py`
 `PisaAuto_file.py`
 `Pisa_xml_parser.py`
@@ -63,16 +64,23 @@ $git clone https://github.com/hocinebib/PisaPy.git
 or download it.
 
 ### Exemple of usage :
-With pdb id :
+With 1 pdb id :
 ```shell
 $cd PisaPy/
-$python src/PisaAuto_id.py 6ta5
+$python src/RunPisaPy.py 6ta5
+```
+
+With many pdb ids :
+```shell
+$cd PisaPy/
+$python src/RunPisaPy.py "6ta5 6iol 6iok"
 ```
 
 with pdb files :
 ```shell
-$python3 src/PisaAuto_file.py pdb_folder/
+$python3 src/RunPisaPy.py pdb_folder/ --d 1
 ```
+
 
 
 
