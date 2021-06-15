@@ -24,6 +24,7 @@ In order to be able to run this code of course you need to have python3 but also
 * `pandas`
 * `networkx`
 * `matplotlib`
+* `Biopython`
 
 PyPi installation :
 ```shell
@@ -33,6 +34,7 @@ $pip install argparse
 $pip install pandas
 $pip install networkx
 $pip install matplotlib
+$pip install biopython
 ```
 
 Conda installation :
@@ -45,9 +47,11 @@ $conda install -c conda-forge argparse
 $conda install pandas
 $conda install -c anaconda networkx
 $conda install -c conda-forge matplotlib
+$conda install -c conda-forge biopython
 ```
 ### Others :
 selenium requires [geckodriver](https://github.com/mozilla/geckodriver/releases) for firefox, check this [link](https://selenium-python.readthedocs.io/installation.html#drivers) for the other browsers.
+[Naccess](http://www.bioinf.manchester.ac.uk/naccess/nacwelcome.html) is also required if you want to get the accessibility
 
 ### Script files :
 
@@ -56,6 +60,8 @@ selenium requires [geckodriver](https://github.com/mozilla/geckodriver/releases)
 `PisaAuto_file.py`
 `Pisa_xml_parser.py`
 `Parse_Interfacetable.py`
+`Auto_Naccess.py`
+`Download_pdbfasta.py`
 
 ## Usage :
 1. First clone this repository :
