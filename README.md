@@ -79,7 +79,7 @@ $python src/PisaAuto_id.py 6ta5
 
 with pdb files :
 ```shell
-$python3 src/PisaAuto_file.py pdb_folder/ --d 1
+$python3 src/PisaAuto_file.py pdb_folder/
 ```
 
 ### Exemple of pipeline usage :
