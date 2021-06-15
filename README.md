@@ -55,6 +55,7 @@ selenium requires [geckodriver](https://github.com/mozilla/geckodriver/releases)
 `PisaAuto_id.py`
 `PisaAuto_file.py`
 `Pisa_xml_parser.py`
+`Parse_Interfacetable.py`
 
 ## Usage :
 1. First clone this repository :
