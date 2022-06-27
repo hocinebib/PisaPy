@@ -103,14 +103,25 @@ def launch_pdb_file(driver, pdb_file):
     spinner = Halo(text='Running Pisa', spinner='dots')
     spinner.start()
 
-    while(not check_exists_by_name('downloadXML', driver)):
-        pass
-
     time.sleep(4)
 
-    spinner.stop()
+    if driver.find_element_by_class_name("phead").text.startswith("No"):
 
-    return driver
+        spinner.stop()
+        
+        print('No Contacts found')
+
+        return driver, False
+
+    else:
+        while(not check_exists_by_name('downloadXML', driver)):
+            pass
+
+        time.sleep(4)
+
+        spinner.stop()
+
+        return driver, True
 
 
 if __name__ == '__main__':
@@ -130,5 +141,7 @@ if __name__ == '__main__':
     for i, file in enumerate(PDB_FILES):
         print("## pdb file "+str(i+1)+"/"+str(len(PDB_FILES)))
         driver = pisa.start()
-        pisa.download_xmls(launch_pdb_file(driver, file), file.split('/')[-1])
+        driver, boo = launch_pdb_file(driver, file)
+        if boo:
+            pisa.download_xmls(driver, file.split('/')[-1])
         driver.quit()
